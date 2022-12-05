@@ -40,7 +40,6 @@ const updateRecipe = async (req, res) => {
     const {id} = req.params;
 
     const recipeData = req.body
-
     try {
         const recipeDB = await RecipeModel.findById(id)
         if (recipeDB.cloudinary_id){
@@ -50,7 +49,7 @@ const updateRecipe = async (req, res) => {
         if (req.files.file){
             const cloud_image = await cloudinary.uploader.upload(req.files.file.path)
             recipeData.cloudinary_id = cloud_image.public_id;
-            recipeData.file = cloud_image.url;
+            recipeData.img = cloud_image.url;
             console.log(recipeData)
         }
 
